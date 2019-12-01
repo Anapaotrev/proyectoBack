@@ -1,4 +1,4 @@
-const Event = require('../models/Event')
+const Event = require('../models/event')
 
 const getEvents = function(req, res) {
     Event.find({ createdBy: req.user._id }).then(function(events) {
