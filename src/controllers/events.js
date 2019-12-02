@@ -21,7 +21,13 @@ const getEvent = function(req, res) {
 }
 
 const newEvent = function(req, res) {
-    const event = new Event(req.body)
+    const event = new Event({
+        createdBy: req.user._id,
+        text: req.body.text,
+        start_date: req.body.start_date,
+        end_date: req.body.end_date
+
+    })
     event.save().then(function() {
       return res.send(event)
     }).catch(function(error) {
