@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 
 const eventSchema = mongoose.Schema({
-    name: {
+    text: {
         type: String,
         required: true
     },
@@ -11,35 +11,23 @@ const eventSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    allDay: {
-        type: Boolean,
-        default: false
-    },
-    starts: {
+    start_date: {
         type: Date,
-        required: function() { return this.allDay != null; },
+        required: true,
         validate(value) {
             if (value > this.ends) {
                 throw new Error('Should be smaller than end date')
             }
         }
     }, 
-    ends: {
+    end_date: {
         type: Date,
-        required: function() { return this.allDay != null; },
+        required: true,
         validate(value) {
             if (value < this.starts) {
                 throw new Error('Should be bigger than start date')
             }
         }
-    },
-    repeat: {
-        type: String,
-        enum: ['Every Day', 'Every Week', 'Every Month', 'Every Year']
-    },
-    notes: {
-        type: String,
-        max: 150
     }
 })
 
