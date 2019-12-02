@@ -22,7 +22,7 @@ const getEvent = function(req, res) {
 
 const newEvent = function(req, res) {
     const event = new Event(req.body)
-    Event.save().then(function() {
+    event.save().then(function() {
       return res.send(event)
     }).catch(function(error) {
       return res.status(400).send(error)
